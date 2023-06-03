@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue';
 import { Icon } from '@iconify/vue'
+import { useCart } from '../../stores/cart';
 
 const props = defineProps({
   data: Object
@@ -8,11 +9,16 @@ const props = defineProps({
 
 const { imagesBasePath, movie, release_date, genre } = ref(props.data).value
 
+const cart = useCart()
+async function addItemToCart(id){
+  await cart.addItem(id)
+}
+
 </script>
 <template>
   <div class="flex flex-col relative border rounded-b border-slate-600 text-slate-800">
-    <button class="absolute top-1 right-1 p-2 z-10 backdrop-blur-sm bg-white/60 rounded-full peer">
-      <Icon icon="mdi:heart" class="text-slate-600 text-3xl peer-hover:text-red-500" />
+    <button class="absolute top-1 right-1 p-2 z-10 backdrop-blur-sm bg-white/60 rounded-full">
+      <Icon icon="mdi:heart" class="text-slate-600 text-3xl transition-colors hover:text-red-500" />
     </button>
     <a href="#" class="flex flex-col flex-1">
       <div class="relative">
@@ -37,7 +43,10 @@ const { imagesBasePath, movie, release_date, genre } = ref(props.data).value
         </div>
       </div>
     </a>
-    <button class="rounded w-full px-4 py-2 text-white bg-button mt-3 transition-colors hover:bg-violet-900">
+    <button 
+      class="rounded w-full px-4 py-2 text-white bg-button mt-3 transition-colors hover:bg-violet-900"
+      @click="addItemToCart(movie.id)"
+    >
       Adicionar
     </button>
   </div>
