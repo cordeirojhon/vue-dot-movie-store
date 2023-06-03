@@ -28,7 +28,7 @@ function getGenre(id) {
 </script>
 
 <template>
-  <div v-if="results" class="grid grid-cols-4 gap-16">
+  <div v-if="results" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-16">
     <template v-for="movie in results" :key="movie.id">
       <CardItem :data="{ 
         movie, 

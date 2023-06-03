@@ -40,7 +40,7 @@ async function removeAllItems(){
       </button>
     </header>
     <template v-if="cart.items.length">
-      <ul class="flex-1 space-y-4">
+      <ul class="flex-1 space-y-4 mb-6">
         <li v-for="{value: movie} in cart.items" class="flex space-x-4 items-center w-full">
           <img 
             :src="`${imagesBasePath}w45${movie.poster_path}`" 
@@ -69,9 +69,9 @@ async function removeAllItems(){
           <span class="text-xl">Total:</span>
           <span class="font-bold text-2xl">R$ 19,98</span>
         </div>
-        <a href="/checkout" class="block text-center rounded w-full px-4 py-2 text-2xl font-semibold text-white leading-relaxed bg-button mt-6 transition-colors hover:bg-violet-900">
+        <router-link to="/checkout" class="block text-center rounded w-full px-4 py-2 text-2xl font-semibold text-white leading-relaxed bg-button mt-6 transition-colors hover:bg-violet-900">
           Finalizar compra
-        </a>
+        </router-link>
       </footer>
     </template>
     <div v-else>
