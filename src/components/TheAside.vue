@@ -10,16 +10,17 @@ const headerHeight = ref('60px')
 
 const movieConfiguration = useMovieConfiguration()
 
-if(!movieConfiguration.configuration){
-  await movieConfiguration.getData()
-}
+const imagesBasePath = ref(null)
 
-const { configuration } = movieConfiguration
-const imagesBasePath = configuration.images.base_url
-
-onMounted(() => {
+onMounted(async () => {
   const header = document.querySelector('header');
   headerHeight.value = header.offsetHeight;
+
+  if(!movieConfiguration.configuration){
+    await movieConfiguration.getData()
+  }
+
+  imagesBasePath.value = movieConfiguration.configuration.images.base_url
 });
 
 async function removeItemToCart(id){

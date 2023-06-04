@@ -16,11 +16,9 @@ const toggleAsideCart = () => {
   <main aria-labelledby="mainTitle">
     <TheHeader @clickEvent="toggleAsideCart()" />
     <section>
-      <Suspense>
-        <Transition>
-          <TheAside v-show="toggleAsideActivation" />
-        </Transition>
-      </Suspense>
+      <Transition>
+        <TheAside v-show="toggleAsideActivation" />
+      </Transition>
       <div class="container max-w-screen-lg m-auto px-2 py-12">
         <RouterView />
       </div>
