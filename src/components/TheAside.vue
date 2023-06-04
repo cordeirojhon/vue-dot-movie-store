@@ -9,10 +9,13 @@ const cart = ref(useCart())
 const headerHeight = ref('60px')
 
 const movieConfiguration = useMovieConfiguration()
-await movieConfiguration.getData()
+
+if(!movieConfiguration.configuration){
+  await movieConfiguration.getData()
+}
 
 const { configuration } = movieConfiguration
-const imagesBasePath = configuration.data.images.base_url
+const imagesBasePath = configuration.images.base_url
 
 onMounted(() => {
   const header = document.querySelector('header');

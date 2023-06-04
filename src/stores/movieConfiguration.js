@@ -8,8 +8,10 @@ export const useMovieConfiguration = defineStore('movie-configuration', {
   }),
   actions: {
     async getData() {
-      this.configuration = await useFetch('https://api.themoviedb.org/3/configuration')
-      this.genres = await useFetch('https://api.themoviedb.org/3/genre/movie/list?language=pt')
+      const {data: configuration} = await useFetch('https://api.themoviedb.org/3/configuration') 
+      const {data: genres} = await useFetch('https://api.themoviedb.org/3/genre/movie/list?language=pt')
+      this.configuration = configuration
+      this.genres = genres
     }
   }
 })

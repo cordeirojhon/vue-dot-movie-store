@@ -1,20 +1,22 @@
 <script setup>
+import { ref } from 'vue'
+import { useMovieConfiguration } from '../../stores/movieConfiguration'
 import { useFetch } from '../../composables/fetch'
 import CardItem from './CardItem.vue'
-import { useMovieConfiguration } from '../../stores/movieConfiguration'
 import useDataFormat from '../../composables/dateFormat'
 
 const movieConfiguration = useMovieConfiguration()
-await movieConfiguration.getData()
-const { configuration, genres } = movieConfiguration
-const { data: movieGenres } = genres;
+
+if(!movieConfiguration.configuration){
+  await movieConfiguration.getData()
+}
 
 const { data } = await useFetch('https://api.themoviedb.org/3/trending/movie/week?language=pt-BR')
 const { results } = data.value;
 
 const { formatDate, formattedDate } = useDataFormat()
 
-const imagesBasePath = configuration.data.images.base_url
+const imagesBasePath = movieConfiguration.configuration.images.base_url
 
 function getFormattedDate(dateString) {
   formatDate(dateString)
@@ -22,13 +24,12 @@ function getFormattedDate(dateString) {
 }
 
 function getGenre(id) {
-  const { name } = movieGenres.genres.find(genre => genre.id === id)
-  return name
+  return movieConfiguration.genres.genres.find(genre => genre.id === id).name
 }
 </script>
 
 <template>
-  <div v-if="results" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-16">
+  <div v-if="results && movieConfiguration" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-16">
     <template v-for="movie in results" :key="movie.id">
       <CardItem :data="{ 
         movie, 

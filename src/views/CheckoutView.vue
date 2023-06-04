@@ -3,7 +3,5 @@ import CardList from '../components/CardList/CardList.vue'
 </script>
 
 <template>
-  <Suspense>
-    <CardList />
-  </Suspense>
+  <h1>Checkout</h1>
 </template>

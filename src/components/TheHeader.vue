@@ -1,19 +1,16 @@
 <script setup>
-import { ref, defineEmits } from 'vue';
+import { ref } from 'vue';
 import InputSearch from './FormFields/InputSearch.vue';
 import { Icon } from '@iconify/vue';
 import { useCart } from '../stores/cart';
 
 const cart = ref(useCart());
-
-defineEmits(['clickEvent']);
-
 </script>
 
 <template>
   <header class="sticky top-0 left-0 z-20 w-full bg-header">
     <div class="container max-w-screen-xl m-auto p-2">
-      <div class="flex justify-between items-center w-full gap-6 px-3 sm:px-0">
+      <div class="flex justify-between items-center w-full gap-6 px-3 sm:px-4">
         <router-link to="/">
           <h1 id="mainTitle" className="text-3xl font-black text-white">
             LOGO

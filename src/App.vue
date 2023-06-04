@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, onBeforeMount } from 'vue';
 import { RouterLink, RouterView } from 'vue-router'
 import TheHeader from './components/TheHeader.vue'
 import TheAside from './components/TheAside.vue';
@@ -22,7 +22,7 @@ const toggleAsideCart = () => {
         </Transition>
       </Suspense>
       <div class="container max-w-screen-lg m-auto px-2 py-12">
-      <RouterView />
+        <RouterView />
       </div>
     </section>
   </main>
