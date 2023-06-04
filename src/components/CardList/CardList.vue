@@ -17,12 +17,12 @@ onMounted(async () => {
 
   const { data } = await useFetch('https://api.themoviedb.org/3/trending/movie/week?language=pt-BR')
   results.value = data.value.results;
-  imagesBasePath.value = movieConfiguration.configuration.images.base_url
+  imagesBasePath.value = 'http://image.tmdb.org/t/p/' //movieConfiguration.configuration.images.base_url
 })
 
-const { formatDate, formattedDate } = useDataFormat()
 
 function getFormattedDate(dateString) {
+  const { formatDate, formattedDate } = useDataFormat()
   formatDate(dateString)
   return formattedDate.value
 }

@@ -9,11 +9,19 @@ export const useMovieConfiguration = defineStore('movie-configuration', {
   actions: {
     async getData() {
       if (!this.configuration){
-        const {data: configuration} = await useFetch('https://api.themoviedb.org/3/configuration') 
+        const {data: configuration, error} = await useFetch('https://api.themoviedb.org/3/configuration')
+        if(error.value){
+          console.log(error)
+          return
+        }
         this.configuration = configuration
       }
       if (!this.genres){
-        const {data: genres} = await useFetch('https://api.themoviedb.org/3/genre/movie/list?language=pt')
+        const {data: genres, error} = await useFetch('https://api.themoviedb.org/3/genre/movie/list?language=pt')
+        if(error.value){
+          console.log(error)
+          return
+        }
         this.genres = genres
       }
     }

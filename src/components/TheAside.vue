@@ -2,13 +2,13 @@
 import { ref, onMounted } from 'vue';
 import { Icon } from '@iconify/vue';
 import { useCart } from '../stores/cart';
-import { useMovieConfiguration } from '../stores/movieConfiguration';
+// import { useMovieConfiguration } from '../stores/movieConfiguration';
 
 const cart = ref(useCart())
 
 const headerHeight = ref('60px')
 
-const movieConfiguration = useMovieConfiguration()
+// const movieConfiguration = useMovieConfiguration()
 
 const imagesBasePath = ref(null)
 
@@ -16,11 +16,11 @@ onMounted(async () => {
   const header = document.querySelector('header');
   headerHeight.value = header.offsetHeight;
 
-  if(!movieConfiguration.configuration){
-    await movieConfiguration.getData()
-  }
+  // if(!movieConfiguration.configuration){
+  //   await movieConfiguration.getData()
+  // }
 
-  imagesBasePath.value = movieConfiguration.configuration.images.base_url
+  imagesBasePath.value = 'http://image.tmdb.org/t/p/' //movieConfiguration.configuration.images.base_url
 });
 
 async function removeItemToCart(id){
